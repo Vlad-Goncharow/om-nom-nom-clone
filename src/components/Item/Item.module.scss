@@ -1,0 +1,261 @@
+.item {
+  width:25%;
+  padding:5px;
+
+  @media(max-widtH:1000px) {
+    width: 33.3333%;
+  }
+
+  @media(max-widtH:650px) {
+    width: 50%;
+
+    &:nth-child(1) {
+      padding-left: 0;
+    }
+    &:nth-child(2n) {
+      padding-right: 0;
+    }
+    &:nth-child(3n) {
+      padding-left: 0;
+    }
+  }
+}
+.itemWrapper{
+  border-radius: 6px;
+  border: 1px solid#f2f2f2;
+  height: 100%;
+
+  display:flex;
+  justify-content:space-between;
+  flex-direction:column;
+}
+
+.main{
+  height: 100%;
+
+  display:flex;
+  justify-content:space-between;
+  flex-direction:column;
+}
+
+.itemTop {
+  height: 100%;
+
+  display:flex;
+  justify-content:space-between;
+  flex-direction:column;
+}
+
+.itemImg{ 
+  min-height: 200px;
+  position: relative;
+
+  @media(max-widtH:768px) {
+    min-height: 150px;
+  }
+  @media(max-widtH:400px) {
+    min-height: 120px;
+  }
+
+  img {
+    position:absolute;
+    object-fit:contain;
+    width: 100%;
+    height:100%;
+  }
+
+  
+
+  &:hover{
+    .hovered {
+      opacity:1 !important;
+    }
+  }
+}
+.hovered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+  z-index: 5;
+
+  img {
+    widtH: 25px !important;
+  }
+
+  @media(max-width: 768px) {
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    img {
+      display: none;
+    }
+  }
+}
+
+.name {
+  font-size: 16px;
+  color: #000;
+  font-weight: 700;
+}
+.weight {
+  font-size: 13px;
+  color: #8b827d;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.ingridients {
+  padding:15px;
+  font-size: 14px;
+  line-height: 16px;
+  color: #837a76;
+  font-stretch: condensed;
+  margin: 0 0 10px;
+  height: 100%;
+
+  @media(max-width: 1130px) {
+    padding: 8px 10px;
+    font-size: 13px;
+    margin: 0 0 5px;
+  }
+
+  @media(max-widtH:450px) {
+    font-size: 12px;
+  }
+}
+
+.sizesRow {
+  padding:0 15px;
+  justify-content: space-between;
+  display:flex;
+  align-items:center;
+
+  @media(max-width: 1130px) {
+    padding: 0 10px;
+  }
+
+  @media(max-widtH:500px) {
+    flex-wrap: wrap;
+  }
+}
+
+.sizes {
+  margin: 0 2px;
+  border-radius: 12px;
+  padding: 0 8px;
+  line-height: 26px;
+  height: 26px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transform: all 0.5s;
+
+  &:not(.sizes_active):hover {
+    background: rgba(9, 179, 185, 0.5);
+    transform: all 0.5s;
+    color: #fff;
+  }
+
+  @media(max-width: 1130px) {
+    padding: 0 5px;
+    font-size: 11px;
+  }
+}
+
+.sizesActive {
+  background: #09b3b9;
+  color: #fff;
+}
+
+
+.itemBottom {
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  padding:15px;
+
+  @media(max-width: 1130px) {
+    padding: 8px 10px;
+  }
+}
+
+.price{
+  font-weight: 600;
+  line-height: 1;
+  font-size: 18px;
+  color: #000;
+  display: block;
+
+  @media(max-width: 1130px) {
+    font-size: 16px;
+  }
+}
+
+.itemBuy {
+  font-size: 14px;
+  line-height: 14px;
+  padding: 8px 15px;
+  border-radius: 24px;
+  background: #e53324;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+
+  @media(max-widtH:500px) {
+    font-size: 0px;
+    widtH: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: relative;
+
+    &:after {
+      position: absolute;
+      content: "";
+      widtH: 18px;
+      height: 2px;
+      top: 50%;
+      left: 50%;
+      background: #fff;
+      transform: translate(-50%, -50%);
+    }
+
+    &:before {
+      position: absolute;
+      content: "";
+      widtH: 18px;
+      height: 2px;
+      top: 50%;
+      left: 50%;
+      background: #fff;
+      transform: translate(-50%, -50%) rotate(-90deg);
+    }
+  }
+}
+
+
+
+
+
+.rowTop{ 
+  padding:0 15px;
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+
+  @media(max-width: 1130px) {
+    padding: 0 10px;
+  }
+}

@@ -1,0 +1,143 @@
+.popup {
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100000;
+
+  width: 100%;
+  height: 100vh;
+
+
+  visibility: hidden;
+  overflow-y: scroll;
+  transition: visibility 0.4s ease-in-out;
+
+  @media(max-width: 500px) {
+    padding: 15px;
+  }
+  
+}
+.cartPopupWrapper {
+  margin: 50px auto;
+  background: #fff;
+  border-radius: 12px;
+  position: relative;
+  min-width: 450px;
+  max-width: 450px;
+  padding: 20px;
+
+  top: -150%;
+  transition: top 0.3s ease-in-out;
+
+  @media(max-width: 500px) {
+    width: 100%;
+    min-width: auto;
+    padding: 12px;
+  }
+}
+.list{
+  display: flex;
+  flex-direction: column;
+}
+.emptyCart {
+  text-align: center;
+
+  img{
+    width: 250px;
+    height: 250px;
+  }
+
+  h2 {
+    margin: 0;
+    display: block;
+    text-transform: uppercase;
+    line-height: 27px;
+    color: #09b3b9;
+    font-size: 16px;
+    font-weight: 7000;
+  }
+
+  p{
+    margin-bottom: 15px;
+  }
+
+  button{
+    font-weight: 700;
+    width: 100%;
+    outline: none;
+    border-radius: 6px;
+    text-align: center;
+    color: #fff;
+    background: #09b3b9;
+    position: relative;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.openPopup{
+  visibility: visible;
+  
+  .cartPopupWrapper{
+    top: 0;
+  }
+}
+
+.close{
+  position: absolute;
+  right: -30px;
+  top: -30px;
+  width: 30px;
+  height: 30px;
+  background-size: 30px;
+  cursor: pointer;
+  border: 2px solid #fff;
+  border-radius: 50%;
+
+  @media(max-width: 500px) {
+    right: 0;
+    top: -40px;
+  }
+
+  &:after {
+    position: absolute;
+    content: "";
+    width: 20px;
+    height: 2px;
+    background: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  &:before {
+    position: absolute;
+    content: "";
+    width: 20px;
+    height: 2px;
+    background: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+}
+
+.buy{
+  display: block;
+  line-height: 20px;
+  font-size: 14px;
+  margin: 15px 5px 5px;
+  border-radius: 12px;
+  color: #fff;
+  background: #e53324;
+  font-weight: 700;
+  padding: 10px 15px;
+  text-align: center;
+  cursor: pointer;
+}
