@@ -3,16 +3,27 @@ import classNames from 'classnames'
 import zoomimg from '../../assets/img/zoom-in.svg'
 import { AppContext } from '../../App'
 import styles from './Item.module.scss'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { addingToCart } from '../../redux/actions/cartActions'
+import { openPopup } from '../../redux/actions/additionalPopupAction'
 
 function Item({ item, parent }) {
-  const { addToCart, updateData, setAdditionalPopup} = React.useContext(AppContext);
+  const { updateData,} = React.useContext(AppContext);
   //Для получения выбранного активного елемента типа размер
   let [active, setActive] = useState(0)
   let chenges = (index) => {
     setActive(index)
   }
 
+  let dispatch = useDispatch()
+  
+  let addToCart = (obj) => {
+    dispatch(addingToCart(obj))
+  }
+
+  const additioanOpen = () => {
+    dispatch(openPopup())
+  }
   return (
     <div className={styles.item}>
       <div className={styles.itemWrapper}>
@@ -23,7 +34,7 @@ function Item({ item, parent }) {
             <div className={styles.hovered} onClick={() => {
               updateData({ ...item, parent, active })
               //Показываем увеличенную версию товара (попап)
-              setAdditionalPopup(true)
+              additioanOpen()
             }}>
               <img src={zoomimg} alt="" />
             </div>
@@ -70,21 +81,18 @@ function Item({ item, parent }) {
           </div>
           <div className={styles.itemBuy}
             onClick={() => {
-              let parentId = item.catProductId
               addToCart({
                 img: item.catProductImg,
                 ingr: item.catProductIngr,
                 name: item.catProductName,
                 count: 1,
-                parentId,
-                ids: parentId,
+                id: item.catProductId,
                 size: item.catInfo.catSizes ? item.catInfo.catSizes[active] : null,
                 price: item.catInfo.catPrices[active],
                 priceAllProducts: item.catInfo.catPrices[active],
                 parent
-              });
-            }
-            }
+              })
+            }}
           >
             В корзину
           </div>

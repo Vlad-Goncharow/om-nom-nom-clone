@@ -3,9 +3,18 @@ import classNames from 'classnames'
 import { AppContext } from '../../App';
 import styles from './PopupItem.module.scss'
 
-function PopupItem() {
-  const { addToCart, setAdditionalPopup, date,additionalPopup, updateData } = React.useContext(AppContext);
+import { useSelector,useDispatch } from 'react-redux';
+import { closePopup } from '../../redux/actions/additionalPopupAction';
 
+function PopupItem() {
+  const { addToCart, date,updateData } = React.useContext(AppContext);
+
+  let dispatch = useDispatch()
+  let additionalPopup = useSelector(state => state.additionalPopup.popup)
+  const closeAdditional = () => {
+    dispatch(closePopup())
+  }
+  
   const pop = React.useRef()
   React.useEffect(() => {
     //Узнаем ширину скрола
@@ -23,11 +32,11 @@ function PopupItem() {
       pop.current.style.padding = '';
     }
   }, [additionalPopup])
-  
+
   return (
     <div ref={pop} className={`${styles.popupWrapper} ${additionalPopup ? styles.visible : ''}`} >
       <div className={styles.popup} >
-        <div className={styles.close} onClick={() => setAdditionalPopup(false)}></div>
+        <div className={styles.close} onClick={() => closeAdditional()}></div>
         <div className={styles.imgWrapper}>
           <div className={styles.img}>
             <img src={date?.catProductImg} alt="" />

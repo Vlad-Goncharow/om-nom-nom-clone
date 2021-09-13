@@ -40,8 +40,6 @@ function Category() {
   // =================================================
   const qwe = (obj) => obj.catProductFilter === undefined
   React.useEffect(() => {
-    
-
     if (CatBd[id].catPropducts.some(qwe)) {
       setFilterItems(null)
     } else {

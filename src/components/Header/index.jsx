@@ -7,9 +7,16 @@ import { AppContext } from '../../App'
 import styles from './Header.module.scss'
 import classNames from 'classnames'
 
+import {useSelector, useDispatch} from 'react-redux'
+import { setCartPopup } from '../../redux/actions/cartActions'
+
 
 function Header() {
-  const { setCartPopup, dateCart, additionalPopup, cartPopup, setMediamenu, mediaMenu} = React.useContext(AppContext);
+  const dispatch = useDispatch()
+  let cartPopup = useSelector(state => state.cartReducer.cartPopup)
+  let cartItems = useSelector(state => state.cartReducer.cartItems)
+
+  const { additionalPopup,setMediamenu, mediaMenu} = React.useContext(AppContext);
   const header = React.useRef()
 
   //Проскролилась ли страница больше высоты шапки
@@ -85,8 +92,8 @@ function Header() {
               </div>
             </div>
             <div className={styles.rowAlign}>
-              <div className={styles.mediaCart} onClick={() => setCartPopup(true)}>
-                <div className={styles.mediaCounter}>{dateCart.length}</div>
+              <div className={styles.mediaCart} onClick={() => dispatch(setCartPopup(true))}>
+                <div className={styles.mediaCounter}>{cartItems.length}</div>
                 <img src={card} alt="sdf" />
               </div>
               <div className={`${styles.mediaBurger} ${mediaMenu ? styles.mediaBurger__active: ''}`} onClick={() => setMediamenu(!mediaMenu)}></div>
@@ -145,13 +152,13 @@ function Header() {
               }
             </div>
 
-            <div className={styles.storeItem} onClick={() => setCartPopup(true)} >
+            <div className={styles.storeItem} onClick={() => dispatch(setCartPopup(true))} >
               <div className={styles.store}>
                 <img src={card} alt="sdf" />
               </div>
 
               <div className={styles.storeText}>
-                {dateCart.length >= 1 ? dateCart.reduce((sum, obj) => (obj.price * obj.count) + sum, 0) + 'грн' : null}
+                {cartItems.length >= 1 ? cartItems.reduce((sum, obj) => (obj.price * obj.count) + sum, 0) + 'грн' : null}
               </div>
             </div>
 

@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 
+import { useSelector } from 'react-redux';
+
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import About from './pages/About';
@@ -15,13 +17,9 @@ export const AppContext = React.createContext({})
 
 function App() {
   // =================================================
+  let cartPopup = useSelector(state => state.cartReducer.cartPopup)
+  let additionalPopup = useSelector(state => state.additionalPopup.popup)
   //Попап с корзиной
-  let [cartPopup, setCartPopup] = useState(false)
-  // /================================================
-
-  // =================================================
-  //Попап товара открыт / закрыт
-  let [additionalPopup, setAdditionalPopup] = useState(false)
   // /================================================
 
   // =================================================
@@ -46,72 +44,6 @@ function App() {
   // =================================================
 
   // =================================================
-  // Массив товаров в корзине
-  let [dateCart, setDateCart] = useState([])
-  // =================================================
-
-  // =================================================
-  // Добавление товара в корзину
-  let addToCart = (obj) => {
-    const findItem = dateCart.find(item => item.price === obj.price && item.name === obj.name)
-    if (findItem) {
-      console.log(findItem);
-      setDateCart(prev => prev.map(item => {
-        if (item.price === obj.price && item.name === obj.name) {
-          let count = item.count + 1;
-          return {
-            ...item,
-            count: count,
-            priceAllProducts: item.price * count
-          }
-        }
-        return item
-      }))
-    } else {
-      setDateCart(prev => [...prev, obj])
-    }
-  }
-  // =================================================
-
-  // =================================================
-  // Добавление количества товаров в корзине / удаление
-  function incr(obj) {
-    setDateCart(prev => prev.map((item, i) => {
-      if (item.price === obj.price && item.name === obj.name) {
-        let count = item.count + 1;
-        return {
-          ...item,
-          count: count,
-          priceAllProducts: item.price * count
-        }
-      }
-      return item
-    }))
-  }
-  // =================================================
-
-  // =================================================
-  // Уменьшение количества товаров в корзине / удаление
-  function dicr(obj) {
-    setDateCart(prev => prev.map((item, i) => {
-      if (item.price === obj.price && item.name === obj.name) {
-        let count = item.count - 1;
-        if(count === 0) {
-          setDateCart(prev => prev.filter(fil => fil.id !== obj.id || fil.price !== obj.price || fil.parent !== obj.parent))
-        } else{
-          return {
-            ...item,
-            count: count,
-            priceAllProducts: item.price * count
-          }
-        }
-      }
-      return item
-    }))
-  }
-  // /================================================
-
-  // =================================================
   //Данные попапа который открывается при клике на картинку
   let [date, setDate] = useState([])
   let updateData = (value) => {
@@ -133,15 +65,7 @@ function App() {
   
   return (
   <AppContext.Provider value={{
-    setCartPopup,
-    cartPopup,
-    additionalPopup,
-    setAdditionalPopup,
-    addToCart,
-    dicr,
-    incr,
     updateData,
-    dateCart,
     date,
     setMediamenu,
     mediaMenu
